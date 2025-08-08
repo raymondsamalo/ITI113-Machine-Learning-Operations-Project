@@ -1,4 +1,4 @@
-Type,Rotational speed [rpm],Tool wear [min],Strain [minNm],Power (W),Temperature Difference (K)
+Type,Rotational speed _rpm_,Tool wear _min_,Strain _minNm_,Power _W_,Temperature Difference _K_
 2,1510,124,5307.2,6767.828333873371,9.799999999999955
 1,1822,164,3985.2000000000003,4636.425270020888,10.600000000000023
 0,1417,35,1641.5,6959.392181913765,9.0

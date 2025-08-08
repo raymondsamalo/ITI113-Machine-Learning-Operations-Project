@@ -1,4 +1,4 @@
-Type,Air temperature [K],Process temperature [K],Rotational speed [rpm],Torque [Nm],Tool wear [min],Machine failure,TWF,HDF,PWF,OSF,RNF,Strain [minNm],Power (W),Temperature Difference (K)
+Type,Air temperature _K_,Process temperature _K_,Rotational speed _rpm_,Torque _Nm_,Tool wear _min_,Machine failure,TWF,HDF,PWF,OSF,RNF,Strain _minNm_,Power _W_,Temperature Difference _K_
 1,298.1,308.6,1551,42.8,0,0,0,0,0,0,0,0.0,6951.5905601573495,10.5
 0,298.2,308.7,1408,46.3,3,0,0,0,0,0,0,138.89999999999998,6826.722724152668,10.5
 0,298.1,308.5,1498,49.4,5,0,0,0,0,0,0,247.0,7749.387542560967,10.399999999999977
