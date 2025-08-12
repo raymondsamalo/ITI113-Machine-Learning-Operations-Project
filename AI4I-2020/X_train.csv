@@ -1,4 +1,4 @@
-Type,Air temperature _K_,Process temperature _K_,Rotational speed _rpm_,Torque _Nm_,Tool wear _min_,Strain _minNm_,Power _W_,Temperature Difference _K_
+Type,Air temperature (K),Process temperature (K),Rotational speed (rpm),Torque (Nm),Tool wear (min),Strain (minNm),Power (W),Temperature Difference (K)
 2,300.6,310.4,1510,42.8,124,5307.2,6767.828333873371,9.799999999999955
 1,295.5,306.1,1822,24.3,164,3985.2000000000003,4636.425270020888,10.600000000000023
 0,301.1,310.1,1417,46.9,35,1641.5,6959.392181913765,9.0
