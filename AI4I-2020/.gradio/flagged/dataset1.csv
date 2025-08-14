@@ -1,3 +1,0 @@
-Air temperature,Process temperature,Rotational speed,Torque,Tool wear,Type,Result,Action,timestamp
-223,244,10,0,0,High,"{""label"": ""y_pred"", ""confidences"": null}",Need Maintenance,2025-08-10 20:48:13.149283
-223,244,10,0,0,High,"{""label"": ""y_pred"", ""confidences"": null}",Need Maintenance,2025-08-10 20:48:14.859043
