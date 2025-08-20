@@ -41,12 +41,12 @@ def preprocessing(df):
     print("number of null values : ", df.isnull().sum().sum())
     df.dropna(inplace=True)
     print("After removing null rows count:", df.shape[0])
-
+    # declare our target labels columns
+    labels = ['Machine failure', 'TWF', 'HDF', 'PWF', 'OSF', 'RNF']
     passed_although_failed = df[pass_yet_fail_check(df)]
     print(
         f"Number of samples that passed although failed: {len(passed_although_failed)}")
-    passed_although_failed.loc[:, ['Machine failure',
-                                'TWF', 'HDF', 'PWF', 'OSF', 'RNF']].head(10)
+    passed_although_failed.loc[:, labels].head(10)
     df['Machine failure'] = np.where(
         pass_yet_fail_check(df), 1, df['Machine failure'])
     passed_although_failed = df[pass_yet_fail_check(df)]
@@ -57,8 +57,7 @@ def preprocessing(df):
     unknown_failures = df[unknown_fail_check(df)]
     print(
         f"Number of failures due to unknown reasons: {len(unknown_failures)}")
-    unknown_failures.loc[:, ['Machine failure',
-                            'TWF', 'HDF', 'PWF', 'OSF', 'RNF']].head(10)
+    unknown_failures.loc[:, labels].head(10)
     df['Machine failure'] = np.where(
         unknown_fail_check(df), 0, df['Machine failure'])
     unknown_failures = df[unknown_fail_check(df)]
@@ -68,7 +67,10 @@ def preprocessing(df):
     df['Strain (minNm)'] = df['Tool wear (min)'] * df['Torque (Nm)'] 
     df['Power (W)'] = df['Rotational speed (rpm)'] * df['Torque (Nm)'] * 2 * np.pi / 60
     df['Temperature Difference (K)'] = df['Process temperature (K)'] - df['Air temperature (K)']
-    labels = ['Machine failure', 'TWF', 'HDF', 'PWF', 'OSF', 'RNF']
+    print("columns after new feature : ",df.columns)
+    print("## Drop Redudant Features")
+    df.drop(columns=['Torque (Nm)', 'Process temperature (K)', 'Air temperature (K)'], inplace=True)
+    print("columns after drop :",df.columns)
     print("# Splitting into train/test...")
     X = df.drop(columns=labels)
     y = df[labels]
