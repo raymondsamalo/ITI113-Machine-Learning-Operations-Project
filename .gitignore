@@ -209,3 +209,6 @@ __marimo__/
 .DS_Store
 .gradio
 data/.DS_Store
+mlruns
+train.py
+preprocess.py
