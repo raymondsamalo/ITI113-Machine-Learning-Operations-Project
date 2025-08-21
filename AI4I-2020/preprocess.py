@@ -71,12 +71,17 @@ def preprocessing(df):
     print("## Drop Redudant Features")
     df.drop(columns=['Torque (Nm)', 'Process temperature (K)', 'Air temperature (K)'], inplace=True)
     print("columns after drop :",df.columns)
+    print("## Convert Int to Float for MLFlow")
+    for col in df.columns:
+        if df[col].dtype == np.int64 or df[col].dtype == np.int32: # Check for common integer types
+            df[col] = df[col].astype(np.float64)
     print("# Splitting into train/test...")
     X = df.drop(columns=labels)
     y = df[labels]
     X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=42,  stratify=y['Machine failure']) 
     train=pd.concat([X_train, y_train], axis=1)
     test=pd.concat([X_test, y_test], axis=1)
+    print("# Processing Done")
     return train, test
 
 if __name__ == "__main__":

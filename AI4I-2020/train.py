@@ -16,15 +16,12 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score, accuracy
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.tree import DecisionTreeClassifier
 
-def train(df, max_depth=5, min_samples_leaf=30, min_samples_split=20):
+def train(df, max_depth=10):
     # declare our target labels columns
     labels = ['Machine failure', 'TWF', 'HDF', 'PWF', 'OSF', 'RNF']
     X = df.drop(columns=labels)
     y = df[labels]
-    model = DecisionTreeClassifier(random_state=42,
-                                   max_depth=max_depth,
-                                   min_samples_leaf=min_samples_leaf,
-                                   min_samples_split=min_samples_split)
+    model = RandomForestClassifier(random_state=42, max_depth=max_depth)
     model = MultiOutputClassifier(model)
     model.fit(X, y)
     y_pred = model.predict(X)
@@ -46,7 +43,7 @@ def train(df, max_depth=5, min_samples_leaf=30, min_samples_split=20):
 
 
 def run_experiment(df, experiment_name, run_name=None, model_name="model",
-                   max_depth=5, min_samples_leaf=30, min_samples_split=20):
+                   max_depth=10):
     print("Starting experiment ", experiment_name, " with run name ", run_name)
     run_id = None
     # Start an MLflow run
@@ -58,13 +55,8 @@ def run_experiment(df, experiment_name, run_name=None, model_name="model",
         print(f"\tRunning experiment: {experiment_name}, Run Name: {run_name}")
         # Train the model
         # Provide the first 5 rows of the training data as an example
-        result = train(df,
-                       max_depth=max_depth,
-                       min_samples_leaf=min_samples_leaf,
-                       min_samples_split=min_samples_split)
+        result = train(df, max_depth=max_depth)
         mlflow.log_param("max_depth", max_depth)
-        mlflow.log_param("min_samples_leaf", min_samples_leaf)
-        mlflow.log_param("min_samples_split", min_samples_split)
         mlflow.log_metric("f2", result["f2"])
         mlflow.log_metric("accuracy", result["accuracy"])
         mlflow.log_metric("recall", result["recall"])
@@ -99,8 +91,6 @@ if __name__ == "__main__":
     parser.add_argument("--model_output_path", type=str,
                         default="/opt/ml/model")
     parser.add_argument("--max_depth", type=int, default=5)
-    parser.add_argument("--min_samples_leaf", type=int, default=30)
-    parser.add_argument("--min_samples_split", type=int, default=20)
     args, _ = parser.parse_known_args()
 
     # Load training data
@@ -112,9 +102,7 @@ if __name__ == "__main__":
                                                              experiment_name=args.experiment_name,
                                                              run_name="run_name",
                                                              model_name="model",
-                                                             max_depth=args.max_depth,
-                                                             min_samples_leaf=args.min_samples_leaf,
-                                                             min_samples_split=args.min_samples_split
+                                                             max_depth=args.max_depth
                                                              )
     os.makedirs(args.model_output_path, exist_ok=True)
     joblib.dump(the_model, os.path.join(args.model_output_path, "model.joblib"))
