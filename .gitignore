@@ -212,3 +212,4 @@ data/.DS_Store
 mlruns
 train.py
 preprocess.py
+*/.DS_Store
