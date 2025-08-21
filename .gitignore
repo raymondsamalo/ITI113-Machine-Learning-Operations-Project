@@ -210,6 +210,6 @@ __marimo__/
 .gradio
 data/.DS_Store
 mlruns
-train.py
-preprocess.py
-*/.DS_Store
+./.DS_Store
+./AI4I-2020/.DS_Store
+.DS_Store
